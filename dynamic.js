@@ -48,68 +48,124 @@ function fetchProducts() {
 				btnGrp.appendChild(stock);
 				btnGrp.appendChild(price);
 				cardContainer.appendChild(btnGrp);
+				let fetchProductsTwo = () => {
+					fetch(`https://raw.githubusercontent.com/wedeploy-examples/supermarket-web-example/master/products.json`)
+						.then((response) => response.json())
+						.then((datasTwo) => {
+							var containers = document.getElementById('container');
+							// console.log(datasTwo);
+							// console.log(datasTwo.length);
+							// -2 to even data loading on the page
+							for (let i = 0; i < datasTwo.length - 2; i++) {
+								// console.log(i);
+								// console.log(datasTwo[i].description);
+								let cardContainer = document.createElement('div');
+								let cardTitle = document.createElement('div');
+								let cardBody = document.createElement('div');
+								let image = document.createElement('img');
+								let column = document.createElement('div');
+								column.classList.add('col-md-4', 'my-4');
+								cardContainer.classList.add('card', 'mx-3', 'my-3', 'h-100', 'shadow-md');
+								cardTitle.classList.add('card-title', 'text-center', 'my-2');
+								image.classList.add('card-image-top', 'mx-auto');
+								image.style.width = '200px';
+								image.style.src = '	200px';
+								cardBody.classList.add('card-body', 'text-center');
+								cardTitle.innerHTML = datasTwo[i].title;
+								// console.log(datasTwo[i].title);
+								cardBody.innerHTML = datasTwo[i].description;
+								image.src = `https://raw.githubusercontent.com/wedeploy-examples/supermarket-web-example/master/ui/assets/images/${i}.jpg`;
+								containers.appendChild(column);
+								column.appendChild(cardContainer);
+								cardContainer.appendChild(cardTitle);
+								cardContainer.appendChild(image);
+								cardContainer.appendChild(cardBody);
+
+								// Button group?
+								let span = document.createElement('span');
+								span.classList.add('top-0', 'start-100', 'translate-middle', 'badge', 'rounded-pill', 'bg-danger');
+								span.innerHTML = datasTwo[i].width;
+								let btnGrp = document.createElement('div');
+								btnGrp.classList.add('btn-group', 'mx-auto');
+								let rating = document.createElement('button');
+								rating.classList.add('btn', 'btn-success', 'mx-3', 'my-3');
+								rating.innerHTML = '⭐' + datasTwo[i].rating;
+								let stock = document.createElement('button');
+								stock.classList.add('btn', 'btn-secondary', 'mx-3', 'my-3');
+								stock.innerHTML = 'Stock';
+								let price = document.createElement('button');
+								price.classList.add('btn', 'btn-info', 'mx-3', 'my-3');
+								price.innerHTML = '$' + datasTwo[i].price;
+								stock.appendChild(span);
+								btnGrp.appendChild(rating);
+								btnGrp.appendChild(stock);
+								btnGrp.appendChild(price);
+								cardContainer.appendChild(btnGrp);
+							}
+						});
+				};
+				fetchProductsTwo();
 			}
-			fetchProductsTwo();
 		});
 }
 fetchProducts();
 
-function fetchProductsTwo() {
-	fetch(`https://raw.githubusercontent.com/wedeploy-examples/supermarket-web-example/master/products.json`)
-		.then((response) => response.json())
-		.then((datasTwo) => {
-			var containers = document.getElementById('container');
-			// console.log(datasTwo);
-			// console.log(datasTwo.length);
-			// -2 to even data loading on the page
-			for (let i = 0; i < datasTwo.length - 2; i++) {
-				// console.log(i);
-				// console.log(datasTwo[i].description);
-				let cardContainer = document.createElement('div');
-				let cardTitle = document.createElement('div');
-				let cardBody = document.createElement('div');
-				let image = document.createElement('img');
-				let column = document.createElement('div');
-				column.classList.add('col-md-4', 'my-4');
-				cardContainer.classList.add('card', 'mx-3', 'my-3', 'h-100', 'shadow-md');
-				cardTitle.classList.add('card-title', 'text-center', 'my-2');
-				image.classList.add('card-image-top', 'mx-auto');
-				image.style.width = '200px';
-				image.style.src = '	200px';
-				cardBody.classList.add('card-body', 'text-center');
-				cardTitle.innerHTML = datasTwo[i].title;
-				// console.log(datasTwo[i].title);
-				cardBody.innerHTML = datasTwo[i].description;
-				image.src = `https://raw.githubusercontent.com/wedeploy-examples/supermarket-web-example/master/ui/assets/images/${i}.jpg`;
-				containers.appendChild(column);
-				column.appendChild(cardContainer);
-				cardContainer.appendChild(cardTitle);
-				cardContainer.appendChild(image);
-				cardContainer.appendChild(cardBody);
+// function fetchProductsTwo() {
+// 	fetch(`https://raw.githubusercontent.com/wedeploy-examples/supermarket-web-example/master/products.json`)
+// 		.then((response) => response.json())
+// .then((datasTwo) => {
+// 	var containers = document.getElementById('container');
+// 	// console.log(datasTwo);
+// 	// console.log(datasTwo.length);
+// 	// -2 to even data loading on the page
+// 	for (let i = 0; i < datasTwo.length - 2; i++) {
+// 		// console.log(i);
+// 		// console.log(datasTwo[i].description);
+// 		let cardContainer = document.createElement('div');
+// 		let cardTitle = document.createElement('div');
+// 		let cardBody = document.createElement('div');
+// 		let image = document.createElement('img');
+// 		let column = document.createElement('div');
+// 		column.classList.add('col-md-4', 'my-4');
+// 		cardContainer.classList.add('card', 'mx-3', 'my-3', 'h-100', 'shadow-md');
+// 		cardTitle.classList.add('card-title', 'text-center', 'my-2');
+// 		image.classList.add('card-image-top', 'mx-auto');
+// 		image.style.width = '200px';
+// 		image.style.src = '	200px';
+// 		cardBody.classList.add('card-body', 'text-center');
+// 		cardTitle.innerHTML = datasTwo[i].title;
+// 		// console.log(datasTwo[i].title);
+// 		cardBody.innerHTML = datasTwo[i].description;
+// 		image.src = `https://raw.githubusercontent.com/wedeploy-examples/supermarket-web-example/master/ui/assets/images/${i}.jpg`;
+// 		containers.appendChild(column);
+// 		column.appendChild(cardContainer);
+// 		cardContainer.appendChild(cardTitle);
+// 		cardContainer.appendChild(image);
+// 		cardContainer.appendChild(cardBody);
 
-				// Button group?
-				let span = document.createElement('span');
-				span.classList.add('top-0', 'start-100', 'translate-middle', 'badge', 'rounded-pill', 'bg-danger');
-				span.innerHTML = datasTwo[i].width;
-				let btnGrp = document.createElement('div');
-				btnGrp.classList.add('btn-group', 'mx-auto');
-				let rating = document.createElement('button');
-				rating.classList.add('btn', 'btn-success', 'mx-3', 'my-3');
-				rating.innerHTML = '⭐' + datasTwo[i].rating;
-				let stock = document.createElement('button');
-				stock.classList.add('btn', 'btn-secondary', 'mx-3', 'my-3');
-				stock.innerHTML = 'Stock';
-				let price = document.createElement('button');
-				price.classList.add('btn', 'btn-info', 'mx-3', 'my-3');
-				price.innerHTML = '$' + datasTwo[i].price;
-				stock.appendChild(span);
-				btnGrp.appendChild(rating);
-				btnGrp.appendChild(stock);
-				btnGrp.appendChild(price);
-				cardContainer.appendChild(btnGrp);
-			}
-		});
-}
+// 		// Button group?
+// 		let span = document.createElement('span');
+// 		span.classList.add('top-0', 'start-100', 'translate-middle', 'badge', 'rounded-pill', 'bg-danger');
+// 		span.innerHTML = datasTwo[i].width;
+// 		let btnGrp = document.createElement('div');
+// 		btnGrp.classList.add('btn-group', 'mx-auto');
+// 		let rating = document.createElement('button');
+// 		rating.classList.add('btn', 'btn-success', 'mx-3', 'my-3');
+// 		rating.innerHTML = '⭐' + datasTwo[i].rating;
+// 		let stock = document.createElement('button');
+// 		stock.classList.add('btn', 'btn-secondary', 'mx-3', 'my-3');
+// 		stock.innerHTML = 'Stock';
+// 		let price = document.createElement('button');
+// 		price.classList.add('btn', 'btn-info', 'mx-3', 'my-3');
+// 		price.innerHTML = '$' + datasTwo[i].price;
+// 		stock.appendChild(span);
+// 		btnGrp.appendChild(rating);
+// 		btnGrp.appendChild(stock);
+// 		btnGrp.appendChild(price);
+// 		cardContainer.appendChild(btnGrp);
+// 	}
+// });
+// }
 
 var containers = document.getElementById('container');
 function paginated_fetch(
